@@ -84,7 +84,6 @@ homebrew_cask_apps:
   - google-chrome
   - iterm2
   - keka
-  - libreoffice
   - mac2imgur
 # - osxfuse
   - parsec
@@ -99,5 +98,7 @@ homebrew_cask_apps:
   - tunnelblick
   - visual-studio-code
   - zoom
+  - loom
+  - shottr
 
 osx_script: "~/.osx --no-restart"

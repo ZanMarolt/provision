@@ -10,3 +10,9 @@ afterwards you may install ansible requirements:
 ansible-galaxy install -r requirements.yml
 ansible-playbook main.yml --ask-become-pass
 ```
+
+You can also only run specific roles
+
+```shell
+ansible-playbook main.yml --tags homebrew
+```
