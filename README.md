@@ -16,3 +16,9 @@ You can also only run specific roles
 ```shell
 ansible-playbook main.yml --tags homebrew
 ```
+
+On an ubuntu machine:
+
+```shell
+ansible-playbook linux.yml --ask-become-pass
+```

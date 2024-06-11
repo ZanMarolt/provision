@@ -1,0 +1,127 @@
+---
+- hosts: local
+  vars_files:
+    - default.config.yml
+
+  pre_tasks:
+    - name: Include playbook configuration.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - "{{ playbook_dir }}/config.yml"
+      tags: ['always']
+
+  roles:
+    - role: geerlingguy.dotfiles
+      when: configure_dotfiles
+      tags: ['dotfiles']
+
+  tasks:
+    - name: Get the user, not root
+      command: whoami
+      register: actual_user
+
+    - name: Display user
+      debug:
+        var: actual_user.stdout
+
+    - name: Install required system packages
+      become: yes
+      apt:
+        pkg:
+          - direnv
+          - zsh
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+
+    - name: Add Docker GPG apt Key
+      become: yes
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      become: yes
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      become: yes
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+
+    - name: Get latest Docker Compose version from GitHub
+      uri:
+        url: https://api.github.com/repos/docker/compose/releases/latest
+        return_content: yes
+      register: docker_compose_latest_release
+
+    - name: Set Docker Compose version variable
+      set_fact:
+        docker_compose_version: "{{ docker_compose_latest_release.json.tag_name }}"
+
+    - name: Install Docker Compose
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'
+
+    - name: Ensure Docker service is started and enabled
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add user to docker group
+      command: sudo usermod -aG docker {{ ansible_user_id }}
+      become: yes
+
+    - name: Log in to the docker group
+      command: newgrp docker
+      become: yes
+      args:
+        creates: /var/run/docker.sock
+
+    - name: Ensure Docker socket permissions are correct
+      file:
+        path: /var/run/docker.sock
+        owner: root
+        group: docker
+        mode: '0666'
+
+    - name: Check if oh my zsh is already installed
+      register: oh_my_zsh_installed
+      stat:
+        path: "/home/{{ actual_user.stdout }}/.oh-my-zsh"
+
+    - name: Download oh-my-zsh install script
+      when: not oh_my_zsh_installed.stat.exists
+      get_url:
+        url: "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
+        dest: "/tmp/install_ohmyzsh.sh"
+
+    - name: Install oh my zsh
+      when: not oh_my_zsh_installed.stat.exists
+      command: sh /tmp/install_ohmyzsh.sh
+
+    - name: Get the path to the zsh shell
+      command: which zsh
+      register: zsh_path
+
+    - name: Get the current shell of the user
+      command: echo $SHELL
+      register: current_shell
+      changed_when: false
+
+    - name: Last steps
+      command: echo "don't forget to set zsh as the default shell in the /etc/passwd, get the current shell with echo $SHELL"
+
