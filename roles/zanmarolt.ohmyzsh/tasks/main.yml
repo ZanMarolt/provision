@@ -1,0 +1,23 @@
+---
+- name: Get the user, not root
+  command: whoami
+  register: actual_user
+
+- name: Display user
+  debug:
+    var: actual_user.stdout
+
+- name: Check if oh my zsh is already installed
+  register: oh_my_zsh_installed
+  stat:
+    path: "/Users/{{ actual_user.stdout }}/.oh-my-zsh"
+
+- name: Download oh-my-zsh install script
+  when: not oh_my_zsh_installed.stat.exists
+  get_url:
+    url: "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
+    dest: "/tmp/install_ohmyzsh.sh"
+
+- name: Install oh my zsh
+  when: not oh_my_zsh_installed.stat.exists
+  command: sh /tmp/install_ohmyzsh.sh

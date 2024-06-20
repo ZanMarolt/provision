@@ -1,8 +1,11 @@
 ---
 - hosts: local
 
+  vars:
+    config: "{{ config | default('default') }}"
+
   vars_files:
-    - default.config.yml
+    - "{{ config }}.config.yml"
 
   pre_tasks:
     - name: Include playbook configuration.
@@ -12,6 +15,10 @@
       tags: ['always']
 
   roles:
+    - role: zanmarolt.ohmyzsh
+      tags: ['ohmyzsh']
+    - role: zanmarolt.nvm
+      tags: ['nvm']
     - role: geerlingguy.mac.homebrew
       tags: ['homebrew']
     - role: geerlingguy.dotfiles

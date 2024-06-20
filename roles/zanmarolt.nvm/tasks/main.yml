@@ -1,0 +1,13 @@
+---
+- name: Get the user, not root
+  command: whoami
+  register: actual_user
+
+- name: Display user
+  debug:
+    var: actual_user.stdout
+
+- name: Check if oh my .nvm directory already exists
+  register: oh_my_zsh_installed
+  stat:
+    path: "{{ users_folder }}/{{ actual_user.stdout }}/.nvm"

@@ -3,3 +3,15 @@
 - name: Run .osx dotfiles.
   command: "{{ osx_script }}"
   changed_when: false
+
+# Do this to ensure .dotfiles are being shown now, and we don't need to do a restart
+- name: Reload Finder once osx script is done
+  command: "killall Finder"
+
+# Do this to ensure Dock preferences are visible now, and we don't need to do a restart
+- name: Reload Finder once osx script is done
+  command: "killall Dock"
+
+# Do this to ensure updates in the task bar are visible now, and we don't need to do a restart
+- name: Reload SystemUIServer once osx script is done
+  command: "killall SystemUIServer"

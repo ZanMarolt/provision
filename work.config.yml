@@ -28,14 +28,20 @@ dockitems_remove:
   - Notes
   - Launchpad
   - 'System Preferences'
+  - 'Self Service'
+  - 'Apple@SAP'
+
 
 dockitems_persist:
   - name: "Firefox"
     path: "/Applications/Firefox.app/"
     pos: 2
-  - name: "Thunderbird"
-    path: "/Applications/Thunderbird.app/"
+  - name: "Slack"
+    path: "/Applications/Slack.app/"
     pos: 3
+  - name: "Microsoft Outlook"
+    path: "/Applications/Microsoft Outlook.app/"
+    pos: 4
 
 configure_sudoers: false
 sudoers_custom_config: ''
@@ -53,6 +59,9 @@ dotfiles_files:
   - .exports
   - .gitconfig
 
+homebrew_taps:
+  - github/gh
+
 homebrew_installed_packages:
   - ansible
   - python
@@ -69,37 +78,21 @@ homebrew_installed_packages:
   - gpg
   - nvm
 
-  homebrew_taps:
-  - github/gh
-
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
-  - atom
-  - buttercup
-  - calibre
-  - cyberduck
-  - discord
-  - docker
+  - keepassxc
+  - obsidian
+  - rancher
   - firefox
-  - franz
   - google-chrome
   - iterm2
   - keka
-  - mac2imgur
-# - osxfuse
-  - parsec
-  - plex-media-player
-  - postman
+  - insomnia
   - raycast
   - slack
-  - spectacle
   - spotify
   - sublime-text
-  - thunderbird
-  - tunnelblick
   - visual-studio-code
   - zoom
-  - loom
-  - shottr
 
 osx_script: "files/.osx --no-restart"

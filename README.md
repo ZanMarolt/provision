@@ -7,7 +7,7 @@ Prerequesite is `ansible`. You can use `./files/install.sh` to install the prere
 afterwards you may install ansible requirements:
 
 ```shell
-ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r requirements.yml -p roles.galaxy
 ansible-playbook main.yml --ask-become-pass
 ```
 
