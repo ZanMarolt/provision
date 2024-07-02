@@ -53,6 +53,9 @@ dotfiles_files:
   - .exports
   - .gitconfig
 
+homebrew_taps:
+  - github/gh
+
 homebrew_installed_packages:
   - ansible
   - python
@@ -68,9 +71,8 @@ homebrew_installed_packages:
   - gh
   - gpg
   - nvm
-
-  homebrew_taps:
-  - github/gh
+  - yarn
+  - gh
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
