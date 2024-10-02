@@ -52,6 +52,7 @@ dotfiles_files:
   - .alias
   - .exports
   - .gitconfig
+  - .auto-nvm-use.sh
 
 homebrew_taps:
   - github/gh
