@@ -10,11 +10,6 @@
         - "{{ playbook_dir }}/config.yml"
       tags: ['always']
 
-  roles:
-    - role: geerlingguy.dotfiles
-      when: configure_dotfiles
-      tags: ['dotfiles']
-
   tasks:
     - name: Get the user, not root
       command: whoami
@@ -74,6 +69,7 @@
         url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
         dest: /usr/local/bin/docker-compose
         mode: '0755'
+      become: yes
 
     - name: Ensure Docker service is started and enabled
       systemd:
@@ -97,6 +93,7 @@
         owner: root
         group: docker
         mode: '0666'
+      become: yes
 
     - name: Check if oh my zsh is already installed
       register: oh_my_zsh_installed
@@ -122,6 +119,11 @@
       register: current_shell
       changed_when: false
 
+    - name: Setup dotfiles
+      include_role:
+        name: geerlingguy.dotfiles
+      when: configure_dotfiles
+      tags: ['dotfiles']
+
     - name: Last steps
       command: echo "don't forget to set zsh as the default shell in the /etc/passwd, get the current shell with echo $SHELL"
-
