@@ -73,12 +73,10 @@ homebrew_installed_packages:
   - gpg
   - nvm
   - yarn
-  - gh
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
-  - atom
-  - buttercup
+  - keepassxc
   - calibre
   - cyberduck
   - discord
@@ -95,14 +93,11 @@ homebrew_cask_apps:
   - postman
   - raycast
   - slack
-  - spectacle
   - spotify
   - sublime-text
   - thunderbird
-  - tunnelblick
   - visual-studio-code
   - zoom
-  - loom
-  - shottr
+  - obs
 
 osx_script: "files/.osx --no-restart"
