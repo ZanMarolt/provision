@@ -89,12 +89,15 @@ homebrew_cask_apps:
   - google-chrome
   - iterm2
   - keka
+  - figma
   - bruno
+  - obs
   - raycast
   - slack
-  - spotify
   - sublime-text
   - visual-studio-code
-  - zoom
+  - microsoft-teams
+  - dbeaver-community
+
 
 osx_script: "files/.osx --no-restart"
