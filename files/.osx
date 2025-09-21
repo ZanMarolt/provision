@@ -9,7 +9,7 @@ set -u
 echo "MacOS provision"
 
 # Close any open System Preferences panes, to prevent them from overriding
-# settings we’re about to change
+# settings we're about to change
 osascript -e 'tell application "System Preferences" to quit'
 
 # Ask for the administrator password upfront
@@ -103,3 +103,5 @@ sudo rm -rf  \
         /Library/Application\ Support/Logic \
         /Library/Audio/Apple\ Loops \
         /Users/david/Music/GarageBand
+
+killall Dock

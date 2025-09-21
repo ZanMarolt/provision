@@ -1,8 +1,9 @@
 ---
-# TODO: Use sudo once .osx can be run via root with no user interaction.
+# Run .osx dotfiles with elevated privileges via Ansible's become functionality.
 - name: Run .osx dotfiles.
   command: "{{ osx_script }}"
   changed_when: false
+  become: true
 
 # Do this to ensure .dotfiles are being shown now, and we don't need to do a restart
 - name: Reload Finder once osx script is done

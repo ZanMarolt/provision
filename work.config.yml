@@ -25,9 +25,14 @@ dockitems_remove:
   - 'Feedback Assistant'
   - Contacts
   - Reminders
+  - Apps
+  - Keynote
+  - Pages
+  - Numbers
   - Notes
+  - Mail
   - Launchpad
-  - 'System Preferences'
+  - 'System Settings'
   - 'Self Service'
   - 'Apple@SAP'
 
@@ -98,6 +103,7 @@ homebrew_cask_apps:
   - visual-studio-code
   - microsoft-teams
   - dbeaver-community
+  - microsoft-outlook
 
 
 osx_script: "files/.osx --no-restart"
