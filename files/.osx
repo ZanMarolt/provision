@@ -53,6 +53,13 @@ defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.5
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
+###############################################################################
+# Mouse & Trackpad                                                            #
+###############################################################################
+
+# Set mouse tracking speed (scale: 0-3, higher = faster, default ~0.6875)
+defaults write -g com.apple.mouse.scaling -float 2.0
+
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
@@ -101,7 +108,8 @@ sudo rm -rf  \
         /Applications/GarageBand.app \
         /Library/Application\ Support/GarageBand \
         /Library/Application\ Support/Logic \
-        /Library/Audio/Apple\ Loops \
-        /Users/david/Music/GarageBand
+        /Library/Audio/Apple\ Loops 
 
 killall Dock
+
+echo "MacOS provisioned successfully, restart your machine to apply all changes."
