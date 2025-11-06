@@ -41,7 +41,7 @@ defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
 defaults write com.apple.menuextra.clock IsAnalog -bool false
 
 # Dock autohide
-defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -int 1
 # Set Menu Icon sizes and Animation speed
 defaults write com.apple.dock tilesize -int 42
 defaults write com.apple.dock autohide-delay -float 0
