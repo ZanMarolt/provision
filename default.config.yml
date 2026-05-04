@@ -99,5 +99,6 @@ homebrew_cask_apps:
   - visual-studio-code
   - zoom
   - obs
+  - karabiner-elements
 
 osx_script: "files/.osx --no-restart"

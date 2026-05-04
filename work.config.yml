@@ -104,6 +104,7 @@ homebrew_cask_apps:
   - microsoft-teams
   - dbeaver-community
   - microsoft-outlook
+  - karabiner-elements
 
 
 osx_script: "files/.osx --no-restart"
