@@ -49,6 +49,9 @@ defaults write com.apple.dock autohide-time-modifier -float 0.30
 # Set highlight color to green
 defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
 
+# Disable Apple to change position of virtual desktops (Spaces)
+defaults write com.apple.dock mru-spaces -bool false
+
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
@@ -89,6 +92,8 @@ defaults write com.apple.finder AppleShowAllFiles YES
 
 # Don't display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+# Disable "Confirm closing multiple sessions"
+defaults write com.googlecode.iterm2 OnlyWhenMoreTabs -bool false
 # Don't display pane titles
 defaults write com.googlecode.iterm2 ShowPaneTitles -bool false
 
