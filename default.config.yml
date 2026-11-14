@@ -97,7 +97,6 @@ homebrew_cask_apps:
   - sublime-text
   - thunderbird
   - visual-studio-code
-  - zoom
   - obs
   - karabiner-elements
 
